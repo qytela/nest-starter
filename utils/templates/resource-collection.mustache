@@ -1,0 +1,7 @@
+import { {{className}}Resource } from './{{name}}.resource';
+
+export class {{className}}Collection {
+  constructor(data: any[]) {
+    return data.map((v) => new {{className}}Resource(v));
+  }
+}

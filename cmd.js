@@ -1,0 +1,90 @@
+const fs = require('fs');
+const { Command } = require('commander');
+
+const generateModel = require('./utils/generate-model');
+const generateMigration = require('./utils/generate-migration');
+const generateResource = require('./utils/generate-resource');
+
+const program = new Command();
+
+const importChalk = async () => {
+  const { default: chalk } = await import('chalk');
+  return chalk;
+};
+
+program
+  .command('generate:model')
+  .alias('gmo')
+  .description('Generate new model and migration')
+  .option('--name <name>', 'Model name')
+  .option('--attributes <attributes>', 'Model attributes')
+  .action(async (_, { _optionValues: args }) => {
+    const chalk = await importChalk();
+
+    if (!args.name) {
+      return console.log(chalk.bgRed('--name required'));
+    }
+    if (!args.attributes) {
+      return console.log(chalk.bgRed('--attributes required'));
+    }
+
+    try {
+      const fileExists = fs.existsSync(
+        `src/models/${args.name}.model.ts`,
+        fs.constants.F_OK,
+      );
+      if (fileExists) {
+        return console.log(chalk.bgRed('Model already exists'));
+      }
+    } catch (error) {
+      return console.log(chalk.red(`Error: $${error}`));
+    }
+
+    generateModel(args);
+    console.log(chalk.bgBlue('Model generated success'));
+
+    generateMigration(args);
+    console.log(chalk.bgBlue('Migration generated success'));
+  });
+
+program
+  .command('generate:migration')
+  .alias('gmi')
+  .description('Generate new migration')
+  .option('--name <name>', 'Table name')
+  .option('--attributes <attributes>', 'Table attributes')
+  .action(async (_, { _optionValues: args }) => {
+    const chalk = await importChalk();
+
+    if (!args.name) {
+      return console.log(chalk.bgRed('--name required'));
+    }
+    if (!args.attributes) {
+      return console.log(chalk.bgRed('--attributes required'));
+    }
+
+    generateMigration(args);
+    console.log(chalk.bgBlue('Migration generated success'));
+  });
+
+program
+  .command('generate:resource')
+  .alias('gr')
+  .description('Generate new resource and collection')
+  .option('--name <name>', 'Resource name')
+  .option('--path <path>', 'Resource path')
+  .action(async (_, { _optionValues: args }) => {
+    const chalk = await importChalk();
+
+    if (!args.name) {
+      return console.log(chalk.bgRed('--name required'));
+    }
+    if (!args.path) {
+      return console.log(chalk.bgRed('--path required'));
+    }
+
+    generateResource(args);
+    console.log(chalk.bgBlue('Resource generated success'));
+  });
+
+program.parse(process.argv);
