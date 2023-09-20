@@ -7,17 +7,16 @@ import { BooksResource } from 'src/resources/books/books.resource';
 import { CreateBookDTO } from 'src/dto/books/create-book.dto';
 import { Books } from 'src/models/books.model';
 
+@UseGuards(JwtAuthGuard)
 @Controller('api/books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Entity(Books) book: Books) {
+  findOne(@Entity(Books) book: Books) {
     return new ApiResource(new BooksResource(book));
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() body: CreateBookDTO, @Req() req) {
     const book = await this.booksService.create(body, req.user);

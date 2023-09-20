@@ -23,6 +23,6 @@ export class UsersService {
   }
 
   async findAll(): Promise<Users[]> {
-    return this.usersModel.findAll();
+    return await this.usersModel.findAll();
   }
 }
