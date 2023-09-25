@@ -44,6 +44,12 @@ export class UsersController {
     return new ApiResource(new UsersResource(req.user));
   }
 
+  /**
+   * You can use RolesGuard and Role decorator like this
+   *
+   * @UseGuards(JwtAuthGuard, RolesGuard)
+   * @Role(['admin'])
+   */
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Role(['admin'])
   @Get()

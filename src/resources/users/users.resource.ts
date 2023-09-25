@@ -1,4 +1,5 @@
 import { Users } from 'src/models/users.model';
+import { RolesCollection } from '../roles/roles.collection';
 
 export class UsersResource {
   constructor(data: Users) {
@@ -8,6 +9,7 @@ export class UsersResource {
       email: data.email,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
+      ...(data.roles && { roles: new RolesCollection(data.roles) }),
     };
   }
 }

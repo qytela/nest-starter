@@ -21,8 +21,9 @@ export class RolesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const { roles } = request.user;
+    const mapRoles = roles.map((role) => role.get('name'));
 
-    if (!roles || !roles.some((role) => getRoles.includes(role))) {
+    if (!mapRoles || !mapRoles.some((role) => getRoles.includes(role))) {
       throw new UnauthorizedException('Restricted area');
     }
 

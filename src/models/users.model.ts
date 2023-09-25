@@ -3,14 +3,17 @@ import {
   Model,
   Table,
   HasMany,
+  BelongsToMany,
   BeforeCreate,
   BeforeUpdate,
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 import * as bcrypt from 'bcrypt';
+import { Roles } from './roles.model';
+import { UserHasRoles } from './user-has-roles.model';
 import { Books } from './books.model';
 
-@Table
+@Table({ tableName: 'users' })
 export class Users extends Model {
   @Column({ primaryKey: true, defaultValue: UUIDV4 })
   id: string;
@@ -26,6 +29,9 @@ export class Users extends Model {
 
   @Column
   email: string;
+
+  @BelongsToMany(() => Roles, () => UserHasRoles, 'userId')
+  roles: Roles[];
 
   @HasMany(() => Books, 'userId')
   books: Books[];

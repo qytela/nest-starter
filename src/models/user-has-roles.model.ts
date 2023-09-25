@@ -2,30 +2,23 @@ import {
   Column,
   Model,
   Table,
-  BelongsTo,
   ForeignKey,
+  DataType,
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 import { Users } from './users.model';
+import { Roles } from './roles.model';
 
-@Table({ tableName: 'books' })
-export class Books extends Model {
+@Table({ tableName: 'user_has_roles' })
+export class UserHasRoles extends Model {
   @Column({ primaryKey: true, defaultValue: UUIDV4 })
   id: string;
 
   @ForeignKey(() => Users)
-  @Column
+  @Column(DataType.UUIDV4)
   userId: string;
 
-  @Column
-  author: string;
-
-  @Column
-  title: string;
-
-  @Column
-  description: string;
-
-  @BelongsTo(() => Users, 'userId')
-  user: Users;
+  @ForeignKey(() => Roles)
+  @Column(DataType.UUIDV4)
+  roleId: string;
 }
