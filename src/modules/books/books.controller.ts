@@ -3,6 +3,7 @@ import { BooksService } from './books.service';
 import { JwtAuthGuard } from 'src/modules/auth/strategy/jwt-auth.guard';
 import { Entity } from 'src/decorators/entity.decorator';
 import { ApiResource } from 'src/resources/api.resource';
+import { BooksCollection } from 'src/resources/books/books.collection';
 import { BooksResource } from 'src/resources/books/books.resource';
 import { CreateBookDTO } from 'src/dto/books/create-book.dto';
 import { Books } from 'src/models/books.model';
@@ -11,6 +12,12 @@ import { Books } from 'src/models/books.model';
 @Controller('api/books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
+
+  @Get()
+  async findAll() {
+    const books = await this.booksService.findAll();
+    return new ApiResource(new BooksCollection(books));
+  }
 
   @Get(':id')
   findOne(@Entity(Books) book: Books) {
