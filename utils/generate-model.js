@@ -5,6 +5,7 @@ const generateModel = (args) => {
   const { name, attributes } = args;
 
   const splitName = name.split('-');
+  const tableName = name.replace(/-/g, '_');
   const className = splitName
     .map((v, k) => `${v.charAt(0).toUpperCase()}${v.slice(1)}`)
     .join('');
@@ -13,6 +14,7 @@ const generateModel = (args) => {
 
   const data = {
     modelName: className,
+    tableName: tableName,
     attributes: attributeArray.map((attribute, key) => {
       const isLast = key === attributeArray.length - 1;
       const [fieldName, fieldType] = attribute

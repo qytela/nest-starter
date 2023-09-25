@@ -5,7 +5,7 @@ import {
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-@Table
+@Table({ tableName: '{{tableName}}' })
 export class {{modelName}} extends Model {
   @Column({ primaryKey: true, defaultValue: UUIDV4 })
   id: string;

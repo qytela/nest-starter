@@ -19,7 +19,7 @@ const timestamps = () => {
 const generateMigration = (args) => {
   const { name, attributes } = args;
 
-  const className = name.replace('-', '_');
+  const className = name.replace(/-/g, '_');
 
   const attributeArray = attributes.split(',');
 

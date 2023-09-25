@@ -15,9 +15,10 @@ const importChalk = async () => {
 program
   .command('generate:model')
   .alias('gmo')
-  .description('Generate new model and migration')
+  .description('Generate new model')
   .option('--name <name>', 'Model name')
   .option('--attributes <attributes>', 'Model attributes')
+  .option('--migration, -m', 'Create with new migration', false)
   .action(async (_, { _optionValues: args }) => {
     const chalk = await importChalk();
 
@@ -43,8 +44,10 @@ program
     generateModel(args);
     console.log(chalk.bgBlue('Model generated success'));
 
-    generateMigration(args);
-    console.log(chalk.bgBlue('Migration generated success'));
+    if (args.M) {
+      generateMigration(args);
+      console.log(chalk.bgBlue('Migration generated success'));
+    }
   });
 
 program
