@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import {
   Column,
   Model,
@@ -7,9 +8,9 @@ import {
   BeforeCreate,
   BeforeUpdate,
 } from 'sequelize-typescript';
-import { UUIDV4 } from 'sequelize';
+import { UUIDV4, Transaction } from 'sequelize';
 import * as bcrypt from 'bcrypt';
-import { Roles } from './roles.model';
+import { Roles, RolesEnum } from './roles.model';
 import { UserHasRoles } from './user-has-roles.model';
 import { Books } from './books.model';
 
@@ -38,10 +39,29 @@ export class Users extends Model {
 
   @BeforeCreate
   @BeforeUpdate
-  static hashPassword(instance: Users) {
+  static hashPassword(instance: Users): void {
     if (instance.changed('password')) {
       const saltRounds = 10;
       instance.password = bcrypt.hashSync(instance.password, saltRounds);
     }
+  }
+
+  static async assignRole(
+    userId: string,
+    roleName: RolesEnum,
+    transaction?: Transaction,
+  ): Promise<void> {
+    const role = await Roles.findOne({ where: { name: roleName } });
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    await UserHasRoles.create(
+      {
+        userId,
+        roleId: role.id,
+      },
+      { ...(transaction && { transaction }) },
+    );
   }
 }

@@ -4,6 +4,7 @@ import { RolesCollection } from '../roles/roles.collection';
 export class UsersResource {
   constructor(data: Users) {
     return {
+      id: data.id,
       fullname: data.fullname,
       username: data.username,
       email: data.email,
