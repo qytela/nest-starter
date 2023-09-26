@@ -19,6 +19,21 @@ $ cd example
 $ yarn install
 ```
 
+## Setting up .env
+
+```bash
+$ cp .env.example .env
+```
+
+## Migrations and Seeders
+
+```bash
+$ npx sequelize-cli db:migrate
+$ npx sequelize-cli db:seed:all
+```
+
+> This command required sequelize-cli with npx, see more: https://sequelize.org/docs/v6/other-topics/migrations/
+
 ## Running the app
 
 ```bash
@@ -55,7 +70,7 @@ Options:
   -h, --help                        display help for command
 
 Commands:
-  generate:model|gmo [options]      Generate new model and migration
+  generate:model|gmo [options]      Generate new model
   generate:migration|gmi [options]  Generate new migration
   generate:resource|gr [options]    Generate new resource and collection
   help [command]                    display help for command
