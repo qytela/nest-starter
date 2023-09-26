@@ -24,6 +24,7 @@ export class AuthService {
 
   async login(body: LoginUserDTO): Promise<any> {
     const user = await this.usersModel.findOne({
+      attributes: ['id', 'username', 'password'],
       where: { username: body.username },
     });
     if (!user || !bcrypt.compareSync(body.password, user.password)) {

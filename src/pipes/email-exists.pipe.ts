@@ -8,6 +8,7 @@ export class EmailExistsPipe implements PipeTransform {
 
   async transform(value: any) {
     const user = await this.usersModel.findOne({
+      attributes: ['email'],
       where: { email: value.email },
     });
     if (user) {

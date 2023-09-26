@@ -20,6 +20,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +31,8 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    await queryInterface.addIndex('users', ['username', 'password', 'email']);
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('users');

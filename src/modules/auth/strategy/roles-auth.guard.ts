@@ -24,7 +24,7 @@ export class RolesGuard implements CanActivate {
     const mapRoles = roles.map((role) => role.get('name'));
 
     if (!mapRoles || !mapRoles.some((role) => getRoles.includes(role))) {
-      throw new UnauthorizedException('Restricted area');
+      throw new UnauthorizedException('User does not have the right roles');
     }
 
     return true;
