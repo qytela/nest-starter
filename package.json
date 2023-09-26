@@ -26,6 +26,7 @@
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/passport": "^10.0.2",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-fastify": "^10.2.6",
     "@nestjs/sequelize": "^10.0.0",
     "bcrypt": "^5.1.1",
     "chalk": "^5.3.0",
