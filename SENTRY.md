@@ -23,6 +23,7 @@ After successfully create Project, you must add WebHooks url.
    ![Project](https://i.ibb.co/tLPH3rz/image.png)
 
 2. Legacy Integration > WebHooks > Enable Plugin > Fill your WebHooks url > Save Changes
+
    ![WebHooks](https://i.ibb.co/j8Nc8Wy/image.png)
 
    > You can use ngrok or other to testing, Sentry not allowed localhost.
@@ -33,6 +34,7 @@ After successfully create Project, you must add WebHooks url.
 
 - Select project and environment (Recommended is All Environments)
 - The important of this step is number 1 and 2, you can customize the other settings then Create the Rule
+
   ![Number 2](https://i.ibb.co/BGLZkhn/image.png)
 
 ## Create Telegram Bot
