@@ -12,17 +12,17 @@ export const Entity = createParamDecorator(
       data = [data, Object.keys(args.params)];
     }
 
-    let relations = [];
+    const include = [];
     if (Array.isArray(data) && data.length > 2) {
-      relations = data[2];
+      include.push(...data[2]);
     }
 
     const [type, param] = data;
     const value = args.params[param];
-    const query = {};
+    const where = {};
 
-    query[param] = value;
-    const entity = await type.findOne({ where: query, include: relations });
+    where[param] = value;
+    const entity = await type.findOne({ where, include });
 
     if (!entity) {
       throw new NotFoundException();
