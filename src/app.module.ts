@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { BooksModule } from './modules/books/books.module';
+import { SentryModule } from './modules/sentry/sentry.module';
+import { TelegramModule } from './dynamic-modules/telegram/telegram.module';
 
 @Module({
   imports: [
@@ -22,10 +24,13 @@ import { BooksModule } from './modules/books/books.module';
       database: process.env.DATABASE_NAME,
       autoLoadModels: true,
       synchronize: true,
+      logging: process.env.DATABASE_QUERY_LOG === 'true',
     }),
     AuthModule,
     UsersModule,
     BooksModule,
+    SentryModule,
+    TelegramModule,
   ],
   controllers: [AppController],
   providers: [AppService],
