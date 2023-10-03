@@ -19,6 +19,7 @@ If you confused with configuration step on Sentry Dashboard, follow this step:
 After successfully create Project, you must add WebHooks url.
 
 1. Go to Project settings
+
    ![Project](https://i.ibb.co/tLPH3rz/image.png)
 
 2. Legacy Integration > WebHooks > Enable Plugin > Fill your WebHooks url > Save Changes
