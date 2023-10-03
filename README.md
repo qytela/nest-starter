@@ -15,7 +15,7 @@ This starter includes:
 
 - [Passport Authentication](https://github.com/qytela/nest-example#migrations-and-seeders)
 - [Sequelize ORM](https://sequelize.org)
-- [Sentry & Telegram Bot](https://github.com/qytela/example/SENTRY.md)
+- [Sentry & Telegram Bot](https://github.com/qytela/nest-example/blob/main/SENTRY.md)
 - [Entity Decorator](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/books/books.controller.ts#L24)
 - [Role Decorator](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/users/users.controller.ts#L22)
 - Permission Decorator (soon)
