@@ -20,7 +20,7 @@ This starter includes:
 - [Role Decorator](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/users/users.controller.ts#L22)
 - Permission Decorator (soon)
 - [Fastify Adapter instead of Express (Switch anytime)](https://docs.nestjs.com/techniques/performance)
-- [Comannder](https://sequelize.org)
+- [Commander](https://github.com/qytela/nest-example/blob/main/SENTRY.md)
 
 ## Installation
 
