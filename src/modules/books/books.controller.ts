@@ -7,21 +7,33 @@ import { BooksCollection } from 'src/resources/books/books.collection';
 import { BooksResource } from 'src/resources/books/books.resource';
 import { CreateBookDTO } from 'src/dto/books/create-book.dto';
 import { Books } from 'src/models/books.model';
+import { Users } from 'src/models/users.model';
 
 @UseGuards(JwtAuthGuard)
 @Controller('api/books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
-  @Get()
-  async findAll() {
-    const books = await this.booksService.findAll();
-    return new ApiResource(new BooksCollection(books));
+  /**
+   * You can custom the param to search and
+   * pass the relations like this:
+   *
+   * @Entity([entity, param, relations])
+   */
+  @Get('title/:title')
+  findByTitle(@Entity([Books, 'title', [Users]]) book: Books) {
+    return new ApiResource(new BooksResource(book));
   }
 
   @Get(':id')
   findOne(@Entity(Books) book: Books) {
     return new ApiResource(new BooksResource(book));
+  }
+
+  @Get()
+  async findAll() {
+    const books = await this.booksService.findAll();
+    return new ApiResource(new BooksCollection(books));
   }
 
   @Post()
