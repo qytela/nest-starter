@@ -2,25 +2,32 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
+  <h1>Supercharge Your Node.js Applications with Nest</h1>
+  <p>A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+</div>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+## Welcome to the Nest Starter Kit!
 
-## Description
+[![GitHub last commit](https://img.shields.io/github/last-commit/qytela/nest-example.svg)](https://github.com/qytela/nest-example/commits/1.x)
+![Production Ready](https://img.shields.io/badge/production-ready-brightgreen.svg)
+![Production Ready](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/qytela/nest-example.svg)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Welcome to the world of Nest, where your Node.js applications take flight! Our starter kit comes with all the essential features you need to build robust and secure server-side applications. Dive in and explore what Nest has to offer.
 
-This starter includes:
+### Features at a Glance:
 
-- [Passport Authentication](https://github.com/qytela/nest-example#migrations-and-seeders)
-- [Sequelize ORM](https://sequelize.org)
-- [Sentry & Telegram Bot](https://github.com/qytela/nest-example/blob/main/SENTRY.md)
-- [Entity Decorator](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/books/books.controller.ts#L24)
-- [Role Decorator](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/users/users.controller.ts#L22)
-- Permission Decorator (soon)
-- [Fastify Adapter instead of Express (Switch anytime)](https://docs.nestjs.com/techniques/performance)
-- [Commander](https://github.com/qytela/nest-example#commander)
+- **Passport Authentication:** Secure your app with Passport authentication.
+- **Sequelize ORM:** Interact with databases seamlessly using Sequelize ORM.
+- **[Sentry & Telegram Integration](https://github.com/qytela/nest-example/blob/main/SENTRY.md):** Keep an eye on your app's health with Sentry and stay notified via Telegram.
+- **Entity Decorator:** Simplify your code with the Entity Decorator ([example](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/books/books.controller.ts#L24)).
+- **Role Decorator:** Manage user roles effortlessly ([example](https://github.com/qytela/nest-example/blob/e8a119c27e671a720ad24768c9a76c1714922c17/src/modules/users/users.controller.ts#L22)).
+- **Permission Decorator:** Coming soon!
+- **Fastify Adapter:** Optimize performance with Fastify Adapter (switch to Express anytime).
+- **Commander:** Harness the power of Commander for efficient command-line operations.
+
+## Getting Started
 
 ## Installation
 
@@ -42,7 +49,7 @@ $ cp .env.example .env
 $ node cmd generate:key --length <number>
 ```
 
-> This is required as authentication secret, default length: 16
+> This is required as an authentication secret, default length: 16
 
 ## Migrations and Seeders
 
@@ -51,7 +58,7 @@ $ npx sequelize-cli db:migrate
 $ npx sequelize-cli db:seed:all
 ```
 
-> This command required sequelize-cli with npx, see more: https://sequelize.org/docs/v6/other-topics/migrations/
+> This command requires sequelize-cli with npx, see more: https://sequelize.org/docs/v6/other-topics/migrations
 
 ## Running the app
 

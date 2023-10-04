@@ -1,7 +1,7 @@
 {
-  "name": "example",
-  "version": "0.0.1",
-  "description": "",
+  "name": "NestJS-Example",
+  "version": "1.0.0",
+  "description": "A progressive Node.js framework for building efficient and scalable server-side applications.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
