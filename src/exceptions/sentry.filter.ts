@@ -16,11 +16,11 @@ export class SentryFilter extends BaseExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const SENTRY_EXCEPTION_CODE = process.env.SENTRY_EXCEPTION_CODE;
-    const excpetionCode: number[] = SENTRY_EXCEPTION_CODE.split(',').map((i) =>
+    const exceptionCode: number[] = SENTRY_EXCEPTION_CODE.split(',').map((i) =>
       parseInt(i),
     );
 
-    if (excpetionCode.includes(httpStatus)) {
+    if (exceptionCode.includes(httpStatus)) {
       console.log('Exception Error: ' + exception);
       Sentry.captureException(exception);
     } else {
