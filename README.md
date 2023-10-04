@@ -36,6 +36,14 @@ $ yarn install
 $ cp .env.example .env
 ```
 
+## Generate App Key
+
+```bash
+$ node cmd generate:key --length <number>
+```
+
+> This is required as authentication secret, default length: 16
+
 ## Migrations and Seeders
 
 ```bash
@@ -68,6 +76,7 @@ Options:
   -h, --help                        display help for command
 
 Commands:
+  generate:key|gk [options]         Generate app key
   generate:model|gmo [options]      Generate new model
   generate:migration|gmi [options]  Generate new migration
   generate:resource|gr [options]    Generate new resource and collection
