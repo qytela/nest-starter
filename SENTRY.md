@@ -1,6 +1,6 @@
 # Sentry and Telegram Bot Notification
 
-If you want using Sentry to log exception and send notification issue with Telegram Bot, you can follow this step.
+If you want to use Sentry to log exceptions and send issue notifications via Telegram Bot, follow these steps.
 
 ## Create Sentry Project
 
@@ -8,32 +8,31 @@ First you need to create Sentry Project, just go to https://sentry.io then regis
 
 If you confused with configuration step on Sentry Dashboard, follow this step:
 
-> 1. Select NodeJS platform
-> 2. Set your alert frequency (ignore to default)
-> 3. Name your project and assign it a team
-> 4. push "Create Project" button, if popup show "Do you use a framework?" just "Skip"
-> 5. Copy the DSN
+- Select NodeJS platform.
+- Set your alert frequency (ignore to default).
+- Name your project and assign it a team.
+- Click "Create Project". If a popup asks "Do you use a framework?" just "Skip".
+- Copy the DSN.
 
 ## Setting up Sentry WebHooks
 
 After successfully create Project, you must add WebHooks url.
 
-1. Go to Project settings
+1. Go to Project settings:
 
    ![Project](https://i.ibb.co/tLPH3rz/image.png)
 
-2. Legacy Integration > WebHooks > Enable Plugin > Fill your WebHooks url > Save Changes
+2. Navigate to Legacy Integration > WebHooks > Enable Plugin > Fill in your WebHooks URL > Save Changes:
 
    ![WebHooks](https://i.ibb.co/j8Nc8Wy/image.png)
 
-   > You can use ngrok or other to testing, Sentry not allowed localhost.
-
-   > Default Sentry WebHooks route is 'api/sentry/webhooks', You can change the route or add custom security.
+   - Note: You can use ngrok or other tools for testing, Sentry does not allow localhost.
+   - Default Sentry WebHooks route is 'api/sentry/webhooks'. You can change the route or add custom security.
 
 3. Create Alert Rule
 
-- Select project and environment (Recommended is All Environments)
-- The important of this step is number 1 and 2, you can customize the other settings then Create the Rule
+- Select project and environment (Recommended is All Environments).
+- The key steps here are 1 and 2, you can customize other settings, then create the rule.
 
   ![Number 2](https://i.ibb.co/BGLZkhn/image.png)
 
@@ -42,7 +41,7 @@ After successfully create Project, you must add WebHooks url.
 You can create the Telegram Bot on Telegram app.
 
 > 1. Find @BotFather, follow the step and finally you get the API Token.
-> 2. Get your chat id, see tutorial https://www.wikihow.com/Know-Chat-ID-on-Telegram-on-Android (Scroll to Part 2)
+> 2. Get your chat id, see tutorial [here](https://www.wikihow.com/Know-Chat-ID-on-Telegram-on-Android) (Scroll to Part 2)
 
 ## Setting up .env
 
@@ -59,4 +58,4 @@ TELEGRAM_MYCHAT_ID= # paste your chat id here
 
 ## Testing Log Exception Sentry
 
-Just add exception like UnauthorizedException, InternalServerErrorException, etc...
+Simply add exceptions like UnauthorizedException, InternalServerErrorException, etc...
