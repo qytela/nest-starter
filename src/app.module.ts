@@ -10,6 +10,8 @@ import { BooksModule } from './modules/books/books.module';
 import { SentryModule } from './modules/sentry/sentry.module';
 import { TelegramModule } from './dynamic-modules/telegram/telegram.module';
 
+import { toBoolean } from 'utils/helpers';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,7 +26,7 @@ import { TelegramModule } from './dynamic-modules/telegram/telegram.module';
       database: process.env.DATABASE_NAME,
       autoLoadModels: true,
       synchronize: true,
-      logging: process.env.DATABASE_QUERY_LOG === 'true',
+      logging: toBoolean(process.env.DATABASE_QUERY_LOG),
     }),
     AuthModule,
     UsersModule,
