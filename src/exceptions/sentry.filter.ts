@@ -7,6 +7,8 @@ import {
 import { BaseExceptionFilter } from '@nestjs/core';
 import * as Sentry from '@sentry/node';
 
+import { config } from 'src/helpers';
+
 @Catch()
 export class SentryFilter extends BaseExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
@@ -15,7 +17,7 @@ export class SentryFilter extends BaseExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const SENTRY_EXCEPTION_CODE = process.env.SENTRY_EXCEPTION_CODE;
+    const SENTRY_EXCEPTION_CODE = config('sentry.SENTRY_EXCEPTION_CODE');
     const exceptionCode: number[] = SENTRY_EXCEPTION_CODE.split(',').map((i) =>
       parseInt(i),
     );

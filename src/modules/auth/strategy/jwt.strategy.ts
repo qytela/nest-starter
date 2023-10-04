@@ -5,7 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Users } from 'src/models/users.model';
 import { Roles } from 'src/models/roles.model';
 
-import { AUTH_JWT_SECRET } from '../constants';
+import { config } from 'src/helpers';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,7 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: AUTH_JWT_SECRET,
+      secretOrKey: config('jwt.AUTH_JWT_SECRET'),
     });
   }
 

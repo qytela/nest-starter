@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Command } = require('commander');
 
+const generateAppKey = require('./utils/generate-appkey');
 const generateModel = require('./utils/generate-model');
 const generateMigration = require('./utils/generate-migration');
 const generateResource = require('./utils/generate-resource');
@@ -11,6 +12,21 @@ const importChalk = async () => {
   const { default: chalk } = await import('chalk');
   return chalk;
 };
+
+program
+  .command('generate:key')
+  .alias('gk')
+  .description('Generate app key')
+  .option('--length, -l <length>', 'String length', 16)
+  .action(async (_, { _optionValues: args }) => {
+    const chalk = await importChalk();
+
+    const key = generateAppKey(args);
+
+    console.log('String Length: ' + chalk.green(args.L));
+    console.log('Secret Key: ' + chalk.green(key));
+    console.log(chalk.green('App Key Generated'));
+  });
 
 program
   .command('generate:model')

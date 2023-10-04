@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TelegramService } from 'src/dynamic-modules/telegram/telegram.service';
 
-import { toBoolean } from 'utils/helpers';
+import { config } from 'src/helpers';
 
 @Injectable()
 export class SentryService {
@@ -14,10 +14,7 @@ export class SentryService {
     const timestamp = new Date().toISOString();
     const onlyLevels = ['ERROR'];
 
-    if (
-      onlyLevels.includes(getLevel) &&
-      toBoolean(process.env.SENTRY_WEBHOOKS)
-    ) {
+    if (onlyLevels.includes(getLevel) && config('sentry.SENTRY_WEBHOOKS')) {
       const message =
         `New Event Issue\n\n` +
         `\u{26D4} Level: ${getLevel}\n` +

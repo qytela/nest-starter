@@ -12,7 +12,7 @@ import { LoginUserDTO } from 'src/dto/users/login-user.dto';
 import { Users } from 'src/models/users.model';
 import { RolesEnum } from 'src/models/roles.model';
 
-import { AUTH_JWT_EXPIRES_IN } from './constants';
+import { config } from 'src/helpers';
 
 @Injectable()
 export class AuthService {
@@ -34,7 +34,7 @@ export class AuthService {
     const payload = { id: user.id };
 
     return new ApiResource({
-      expires_in: AUTH_JWT_EXPIRES_IN,
+      expires_in: config('jwt.AUTH_JWT_EXPIRES_IN'),
       access_token: this.jwtService.sign(payload),
     });
   }
