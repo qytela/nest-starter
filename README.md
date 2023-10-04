@@ -32,8 +32,8 @@ Welcome to the world of Nest, where your Node.js applications take flight! Our s
 ## Installation
 
 ```bash
-$ git clone https://github.com/qytela/example.git
-$ cd example
+$ git clone https://github.com/qytela/nest-starter.git
+$ cd nest-starter
 $ yarn install
 ```
 
