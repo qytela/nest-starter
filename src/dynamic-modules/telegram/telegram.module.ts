@@ -9,10 +9,12 @@ import { config } from 'src/helpers';
     {
       provide: TELEGRAM_BOT,
       useFactory: () => {
-        const TelegramBot = require('node-telegram-bot-api');
-        return new TelegramBot(config('telegram.TELEGRAM_BOT_TOKEN'), {
-          polling: true,
-        });
+        if (config('telegram.TELEGRAM_BOT_TOKEN')) {
+          const TelegramBot = require('node-telegram-bot-api');
+          return new TelegramBot(config('telegram.TELEGRAM_BOT_TOKEN'), {
+            polling: true,
+          });
+        }
       },
     },
     TelegramService,
