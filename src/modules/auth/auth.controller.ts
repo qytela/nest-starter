@@ -6,7 +6,7 @@ import { UsersResource } from 'src/resources/users/users.resource';
 import { LoginUserDTO } from 'src/dto/users/login-user.dto';
 import { CreateUserDTO } from 'src/dto/users/create-user.dto';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

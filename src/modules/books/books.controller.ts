@@ -10,7 +10,7 @@ import { Books } from 'src/models/books.model';
 import { Users } from 'src/models/users.model';
 
 @UseGuards(JwtAuthGuard)
-@Controller('api/books')
+@Controller('books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 

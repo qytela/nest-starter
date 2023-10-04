@@ -5,7 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import * as Sentry from '@sentry/node';
-import { SentryFilter } from './exceptions/sentry/sentry.filter';
+import { SentryFilter } from './exceptions/sentry.filter';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -21,9 +21,10 @@ async function bootstrap() {
   });
 
   const { httpAdapter } = app.get(HttpAdapterHost);
-  app.useGlobalFilters(new SentryFilter(httpAdapter));
 
+  app.useGlobalFilters(new SentryFilter(httpAdapter));
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
 
   await app.listen(3000);
 }

@@ -8,7 +8,7 @@ import { ApiResource } from 'src/resources/api.resource';
 import { UsersResource } from 'src/resources/users/users.resource';
 import { UsersCollection } from 'src/resources/users/users.collection';
 
-@Controller('api/users')
+@Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
