@@ -115,7 +115,7 @@ Here's a sneak peek at what's coming in the next releases:
 - [ ] **Dockerize App**
 - [ ] **And Many More...**
 
-We value your feedback and ideas! Feel free to open an issue, share your thoughts, or suggest new features. Your input helps me become better. 🌟
+Feel free to open an issue, share your thoughts, or suggest new features. Your input helps this project become better. 🌟
 
 ## **License**
 
