@@ -7,7 +7,7 @@
   <p>A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
 </div>
 
-## Welcome to the Nest Starter Kit!
+## Welcome to the Nest Starter Kit 🔥
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qytela/nest-example.svg)](https://github.com/qytela/nest-example/commits/1.x)
 ![Production Ready](https://img.shields.io/badge/production-ready-brightgreen.svg)
@@ -16,20 +16,34 @@
 
 Welcome to the world of Nest, where your Node.js applications take flight! Our starter kit comes with all the essential features you need to build robust and secure server-side applications. Dive in and explore what Nest has to offer.
 
-### Features at a Glance:
+## Table of Contents 📕
 
-- **Passport Authentication:** Secure your app with Passport authentication.
-- **Sequelize ORM:** Interact with databases seamlessly using Sequelize ORM.
-- **[Sentry & Telegram Integration](https://github.com/qytela/nest-starter/blob/1.x/SENTRY.md):** Keep an eye on your app's health with Sentry and stay notified via Telegram.
-- **Entity Decorator:** Simplify your code with the Entity Decorator ([example](https://github.com/qytela/nest-starter/blob/0bfbcd5da0056f4d65fc149289959cbd92581b80/src/modules/books/books.controller.ts#L24)).
-- **Role Decorator:** Manage user roles effortlessly ([example](https://github.com/qytela/nest-starter/blob/0bfbcd5da0056f4d65fc149289959cbd92581b80/src/modules/users/users.controller.ts#L21)).
-- **Permission Decorator:** Coming soon!
-- **Fastify Adapter:** Optimize performance with Fastify Adapter (switch to Express anytime).
-- **Commander:** Harness the power of Commander for efficient command-line operations.
+- [Documentation](#documentation-📁)
+- [Getting Started](#getting-started-is-a-breeze-🚀)
+  - [Installation](#installation)
+  - [Setting up .env](#setting-up-env)
+  - [Generate App Key](#generate-app-key)
+  - [Migrations and Seeders](#migrations-and-seeders)
+  - [Running the app](#running-the-app)
+- [Commander](#commander-⚙️)
+- [Cooming Soon](#cooming-soon-🔜)
 
-## Getting Started
+### Features at a Glance 💪:
 
-## Installation
+- **Passport Authentication :** 🔐 Secure your app with Passport authentication.
+- **Sequelize ORM:** 🎲 Interact with databases seamlessly using Sequelize ORM.
+- **[Sentry & Telegram Integration](https://github.com/qytela/nest-starter/blob/1.x/SENTRY.md):** 🚨 Keep an eye on your app's health with Sentry and stay notified via Telegram.
+- **Custom Decorators:** 🖋 Simplify your code with the Custom Decorators.
+- **Fastify Adapter:** ⚡ Optimize performance with Fastify Adapter (switch to Express anytime).
+- **Commander:** ⚙️ Harness the power of Commander for efficient command-line operations.
+
+## **Documentation** 📁
+
+See more documentation [here](https://github.com/qytela/nest-starter/blob/1.x/DOCS.md).
+
+## **Getting Started is a Breeze! 🚀**
+
+### **Installation:**
 
 ```bash
 $ git clone https://github.com/qytela/nest-starter.git
@@ -37,13 +51,13 @@ $ cd nest-starter
 $ yarn install
 ```
 
-## Setting up .env
+### **Setting up .env**
 
 ```bash
 $ cp .env.example .env
 ```
 
-## Generate App Key
+### **Generate App Key**
 
 ```bash
 $ node cmd generate:key --length <number>
@@ -51,7 +65,7 @@ $ node cmd generate:key --length <number>
 
 > This is required as an authentication secret, default length: 16
 
-## Migrations and Seeders
+### **Migrations and Seeders**
 
 ```bash
 $ npx sequelize-cli db:migrate
@@ -60,7 +74,7 @@ $ npx sequelize-cli db:seed:all
 
 > This command requires sequelize-cli with npx, see more: https://sequelize.org/docs/v6/other-topics/migrations
 
-## Running the app
+### **Running the app**
 
 ```bash
 # development
@@ -73,7 +87,7 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Commander
+## **Commander** ⚙️
 
 ```bash
 $ node cmd help
@@ -90,6 +104,19 @@ Commands:
   help [command]                    display help for command
 ```
 
-## License
+## **Cooming Soon** 🔜
+
+Here's a sneak peek at what's coming in the next releases:
+
+- [ ] **Permissions**
+- [ ] **Storage: AWS S3, MinIO, Local**
+- [ ] **Mailer**
+- [ ] **Social Login**
+- [ ] **Dockerize App**
+- [ ] **And Many More...**
+
+We value your feedback and ideas! Feel free to open an issue, share your thoughts, or suggest new features. Your input helps me become better. 🌟
+
+## **License**
 
 Nest is [MIT licensed](LICENSE).

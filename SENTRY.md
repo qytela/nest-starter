@@ -1,8 +1,20 @@
 # Sentry and Telegram Bot Notification
 
+## Table of Contents 📕
+
+- [Getting Started](#getting-started-🚀)
+  - [Create Sentry Project](#create-sentry-project)
+  - [Setting up Sentry WebHooks](#setting-up-sentry-webhooks)
+  - [Create Telegram Bot](#create-telegram-bot)
+  - [Setting up .env](#setting-up-env)
+  - [Add Sentry & Telegram Module](#add-sentry--telegram-module)
+- [Testing Log Exception Sentry](#testing-log-exception-sentry)
+
+## **Getting Started**
+
 If you want to use Sentry to log exceptions and send issue notifications via Telegram Bot, follow these steps.
 
-## Create Sentry Project
+### **Create Sentry Project**
 
 First you need to create Sentry Project, just go to https://sentry.io then register if you doesn't have account, finally create the Project.
 
@@ -14,7 +26,7 @@ If you confused with configuration step on Sentry Dashboard, follow this step:
 - Click "Create Project". If a popup asks "Do you use a framework?" just "Skip".
 - Copy the DSN.
 
-## Setting up Sentry WebHooks
+### **Setting up Sentry WebHooks**
 
 After successfully create Project, you must add WebHooks url.
 
@@ -36,14 +48,14 @@ After successfully create Project, you must add WebHooks url.
 
   ![Number 2](https://i.ibb.co/BGLZkhn/image.png)
 
-## Create Telegram Bot
+### **Create Telegram Bot**
 
 You can create the Telegram Bot on Telegram app.
 
 > 1. Find @BotFather, follow the step and finally you get the API Token.
 > 2. Get your chat id, see tutorial [here](https://www.wikihow.com/Know-Chat-ID-on-Telegram-on-Android) (Scroll to Part 2)
 
-## Setting up .env
+### **Setting up .env**
 
 ```bash
 SENTRY_ENV=development # development, production, or etc...
@@ -57,7 +69,7 @@ TELEGRAM_BOT_TOKEN= # get from @BotFather
 TELEGRAM_MYCHAT_ID= # paste your chat id here
 ```
 
-## Add Sentry & Telegram Module
+### **Add Sentry & Telegram Module**
 
 `src/app.module.ts`
 
@@ -116,6 +128,6 @@ async function bootstrap() {
 bootstrap();
 ```
 
-## Testing Log Exception Sentry
+## **Testing Log Exception Sentry**
 
 Simply add exceptions like UnauthorizedException, InternalServerErrorException, etc...
