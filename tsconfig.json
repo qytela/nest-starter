@@ -16,6 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/telegram": [
+        "libs/telegram/src"
+      ],
+      "@app/telegram/*": [
+        "libs/telegram/src/*"
+      ],
+      "@app/sentry": [
+        "libs/sentry/src"
+      ],
+      "@app/sentry/*": [
+        "libs/sentry/src/*"
+      ]
+    }
   }
 }

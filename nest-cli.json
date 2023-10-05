@@ -3,6 +3,27 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "telegram": {
+      "type": "library",
+      "root": "libs/telegram",
+      "entryFile": "index",
+      "sourceRoot": "libs/telegram/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/telegram/tsconfig.lib.json"
+      }
+    },
+    "sentry": {
+      "type": "library",
+      "root": "libs/sentry",
+      "entryFile": "index",
+      "sourceRoot": "libs/sentry/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/sentry/tsconfig.lib.json"
+      }
+    }
   }
 }

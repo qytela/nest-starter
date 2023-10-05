@@ -27,7 +27,7 @@ After successfully create Project, you must add WebHooks url.
    ![WebHooks](https://i.ibb.co/j8Nc8Wy/image.png)
 
    - Note: You can use ngrok or other tools for testing, Sentry does not allow localhost.
-   - Default Sentry WebHooks route is 'api/sentry/webhooks'. You can change the route or add custom security.
+   - Default Sentry WebHooks route is 'api/sentry/webhook'. You can change the route or add custom security.
 
 3. Create Alert Rule
 
@@ -48,12 +48,72 @@ You can create the Telegram Bot on Telegram app.
 ```bash
 SENTRY_ENV=development # development, production, or etc...
 SENTRY_DSN= # paste Sentry DSN here
-SENTRY_WEBHOOKS=true # if you enable (true) this, make sure the Telegram bot has configurated
+SENTRY_WEBHOOK=true # if you enable (true) this, make sure the Telegram bot has configurated
+SENTRY_PATH_WEBHOOK=webhook # Sentry WebHooks path
 SENTRY_EXCEPTION_CODE=500,502,503,504,400,403,413,429 # only defined http status code can send notification to Telegram
 
 # using Telegram bot to send Sentry notification issue
 TELEGRAM_BOT_TOKEN= # get from @BotFather
 TELEGRAM_MYCHAT_ID= # paste your chat id here
+```
+
+## Add Sentry & Telegram Module
+
+`src/app.module.ts`
+
+```typescript
+...
+// Import Sentry & Telegram Module
+import { SentryModule } from '@app/sentry';
+import { TelegramModule } from '@app/telegram';
+...
+
+@Module({
+  imports: [
+    ...
+    // Register Sentry Module
+    SentryModule.register({
+      enableWebHook: config('sentry.SENTRY_WEBHOOK'),
+      pathWebHook: config('sentry.SENTRY_PATH_WEBHOOK'),
+    }),
+    // Register Telegram Module
+    TelegramModule.register({
+      token: config('telegram.TELEGRAM_BOT_TOKEN'),
+      chatId: config('telegram.TELEGRAM_MYCHAT_ID'),
+    }),
+  ],
+  ...
+})
+export class AppModule {}
+```
+
+`src/main.ts`
+
+```typescript
+...
+// Import Requires Class
+import { ..., HttpAdapterHost } from '@nestjs/core';
+import * as Sentry from '@sentry/node';
+import { SentryFilter } from '@app/sentry/exceptions/sentry.filter';
+...
+
+async function bootstrap() {
+  ...
+  // Sentry
+  Sentry.init({
+    environment: config('sentry.SENTRY_ENV'),
+    dsn: config('sentry.SENTRY_DSN'),
+  });
+
+  const { httpAdapter } = app.get(HttpAdapterHost);
+
+  // Using global filters to send all exceptions
+  app.useGlobalFilters(
+    new SentryFilter(httpAdapter, config('sentry.SENTRY_EXCEPTION_CODE')),
+  );
+  ...
+}
+bootstrap();
 ```
 
 ## Testing Log Exception Sentry

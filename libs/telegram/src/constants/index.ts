@@ -1,0 +1,1 @@
+export const TELEGRAM_OPTIONS = 'TELEGRAM_OPTIONS';

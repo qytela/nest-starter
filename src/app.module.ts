@@ -6,8 +6,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { BooksModule } from './modules/books/books.module';
-import { SentryModule } from './modules/sentry/sentry.module';
-import { TelegramModule } from './dynamic-modules/telegram/telegram.module';
 
 import { config } from 'src/helpers';
 
@@ -30,8 +28,6 @@ import { config } from 'src/helpers';
     AuthModule,
     UsersModule,
     BooksModule,
-    SentryModule,
-    TelegramModule,
   ],
   controllers: [AppController],
   providers: [AppService],

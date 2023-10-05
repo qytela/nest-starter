@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { TelegramService } from 'src/dynamic-modules/telegram/telegram.service';
+import { Inject, Injectable } from '@nestjs/common';
+import { TelegramService } from '@app/telegram';
 
-import { config } from 'src/helpers';
+import { SENTRY_OPTIONS } from './constants';
+import { IOptions } from './interfaces';
 
 @Injectable()
 export class SentryService {
-  constructor(private telegramService: TelegramService) {}
+  constructor(
+    @Inject(SENTRY_OPTIONS) private options: IOptions,
+    private telegramService: TelegramService,
+  ) {}
 
   async getWebHooks(body) {
     const getLevel = body?.level?.toUpperCase();
@@ -14,7 +18,7 @@ export class SentryService {
     const timestamp = new Date().toISOString();
     const onlyLevels = ['ERROR'];
 
-    if (onlyLevels.includes(getLevel) && config('sentry.SENTRY_WEBHOOKS')) {
+    if (onlyLevels.includes(getLevel) && this.options.enableWebHook) {
       const message =
         `New Event Issue\n\n` +
         `\u{26D4} Level: ${getLevel}\n` +
@@ -25,6 +29,6 @@ export class SentryService {
       return this.telegramService.sendMessage(message);
     }
 
-    return true;
+    return false;
   }
 }
