@@ -39,10 +39,10 @@ program
     const chalk = await importChalk();
 
     if (!args.name) {
-      return console.log(chalk.bgRed('--name required'));
+      return console.log(chalk.red('--name required'));
     }
     if (!args.attributes) {
-      return console.log(chalk.bgRed('--attributes required'));
+      return console.log(chalk.red('--attributes required'));
     }
 
     try {
@@ -51,18 +51,18 @@ program
         fs.constants.F_OK,
       );
       if (fileExists) {
-        return console.log(chalk.bgRed('Model already exists'));
+        return console.log(chalk.red('Model already exists'));
       }
     } catch (error) {
       return console.log(chalk.red(`Error: $${error}`));
     }
 
     generateModel(args);
-    console.log(chalk.bgBlue('Model generated success'));
+    console.log(chalk.green('Model generated success'));
 
     if (args.M) {
       generateMigration(args);
-      console.log(chalk.bgBlue('Migration generated success'));
+      console.log(chalk.green('Migration generated success'));
     }
   });
 
@@ -76,14 +76,14 @@ program
     const chalk = await importChalk();
 
     if (!args.name) {
-      return console.log(chalk.bgRed('--name required'));
+      return console.log(chalk.red('--name required'));
     }
     if (!args.attributes) {
-      return console.log(chalk.bgRed('--attributes required'));
+      return console.log(chalk.red('--attributes required'));
     }
 
     generateMigration(args);
-    console.log(chalk.bgBlue('Migration generated success'));
+    console.log(chalk.green('Migration generated success'));
   });
 
 program
@@ -96,14 +96,14 @@ program
     const chalk = await importChalk();
 
     if (!args.name) {
-      return console.log(chalk.bgRed('--name required'));
+      return console.log(chalk.red('--name required'));
     }
     if (!args.path) {
-      return console.log(chalk.bgRed('--path required'));
+      return console.log(chalk.red('--path required'));
     }
 
     generateResource(args);
-    console.log(chalk.bgBlue('Resource generated success'));
+    console.log(chalk.green('Resource generated success'));
   });
 
 program.parse(process.argv);
