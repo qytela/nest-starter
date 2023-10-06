@@ -9,7 +9,7 @@ import { IOptions } from './interfaces';
   exports: [],
 })
 export class TelegramModule {
-  static register(options: IOptions): DynamicModule {
+  static forRoot(options: IOptions): DynamicModule {
     return {
       global: true,
       module: TelegramModule,

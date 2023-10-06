@@ -13,7 +13,7 @@ import { IOptions } from './interfaces';
   controllers: [SentryController],
 })
 export class SentryModule {
-  static register(options: IOptions): DynamicModule {
+  static forRoot(options: IOptions): DynamicModule {
     return {
       global: true,
       module: SentryModule,
