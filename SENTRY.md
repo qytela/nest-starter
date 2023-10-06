@@ -83,13 +83,13 @@ import { TelegramModule } from '@app/telegram';
 @Module({
   imports: [
     ...
-    // Register Sentry Module
-    SentryModule.register({
+    // Add Sentry Module
+    SentryModule.forRoot({
       enableWebHook: config('sentry.SENTRY_WEBHOOK'),
       pathWebHook: config('sentry.SENTRY_PATH_WEBHOOK'),
     }),
-    // Register Telegram Module
-    TelegramModule.register({
+    // Add Telegram Module
+    TelegramModule.forRoot({
       token: config('telegram.TELEGRAM_BOT_TOKEN'),
       chatId: config('telegram.TELEGRAM_MYCHAT_ID'),
     }),

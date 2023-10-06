@@ -72,7 +72,7 @@ $ npx sequelize-cli db:migrate
 $ npx sequelize-cli db:seed:all
 ```
 
-> This command requires sequelize-cli with npx, see more: https://sequelize.org/docs/v6/other-topics/migrations
+> This command requires sequelize-cli with npx, see more [here](https://sequelize.org/docs/v6/other-topics/migrations).
 
 ### **Running the app**
 
@@ -108,7 +108,7 @@ Commands:
 
 Here's a sneak peek at what's coming in the next releases:
 
-- [ ] **Permissions**
+- [x] **Permissions**
 - [ ] **Storage: AWS S3, MinIO, Local**
 - [ ] **Mailer**
 - [ ] **Social Login**

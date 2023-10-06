@@ -7,11 +7,13 @@
 - [Decorators](#decorators)
   - [Entity Decorator](#entity-decorator)
   - [Role Decorator](#role-decorator)
+  - [Permission Decorator](#permission-decorator)
 - [Resource & Collection](#resource--collection)
   - [Resource](#resource)
   - [Collection](#collection)
 - [Models](#models)
 - [Migrations](#migrations)
+- [Seeders](#seeders)
 
 ## **Authentication**
 
@@ -115,6 +117,55 @@ export class BooksController {
 
 ```
 
+### **Permission Decorator**
+
+Fortify your routes with fine-grained access control, ensuring robust security through role permissions. This decorator checks the user roles for specific permissions, providing an extra layer of security for your routes.
+
+Example:
+
+```typescript
+...
+import { PermissionsGuard } from 'src/modules/auth/strategy/permissions-auth.guard';
+import { Permission } from 'src/decorators/permission.decorator';
+...
+
+@Controller('books')
+export class BooksController {
+  ...
+
+  @UseGuards(PermissionsGuard, ...Others)
+  @Permission(['create-book', 'delete-book', ...Others])
+  @Get()
+  async findAll() {
+    return 'You access the protect route!'
+  }
+}
+```
+
+Extend your protection with [Role Decorators](#role-decorator):
+
+```typescript
+...
+import { RolesGuard } from 'src/modules/auth/strategy/roles-auth.guard';
+import { PermissionsGuard } from 'src/modules/auth/strategy/permissions-auth.guard';
+import { Role } from 'src/decorators/role.decorator';
+import { Permission } from 'src/decorators/permission.decorator';
+...
+
+@Controller('books')
+export class BooksController {
+  ...
+
+  @UseGuards(RolesGuard, PermissionsGuard, ...Others)
+  @Role(['Admin', 'Officer', ...Others])
+  @Permission(['create-book', 'delete-book', ...Others])
+  @Get()
+  async findAll() {
+    return 'You access the protect route!'
+  }
+}
+```
+
 ## **Resource & Collection**
 
 ### **Resource**
@@ -195,6 +246,8 @@ Example to create a model (with migration):
 $ node cmd generate:model --name books --attributes author:string,title:string,description:text,isActive:boolean -m
 ```
 
+> Note: if model name more than 1 word, use (-). Example: --name book-organization
+
 See more DataTypes on [Sequelize docs](https://sequelize.org/docs/v6/core-concepts/model-basics/#data-types).
 
 ## **Migrations**
@@ -206,3 +259,37 @@ Example to ceate a migration (same as creating model but only migration):
 ```bash
 $ node cmd generate:migration --name books --attributes author:string,title:string,description:text,isActive:boolean
 ```
+
+> Note: if table name more than 1 word, use (-). Example: --name book-organization
+
+Run your migration:
+
+```bash
+$ npx sequelize-cli db:migrate
+```
+
+> This command requires sequelize-cli with npx, see more [here](https://sequelize.org/docs/v6/other-topics/migrations).
+
+## **Seeders**
+
+Craft your seeders effortlessly.
+
+Example to create a seeder:
+
+```bash
+$ npx sequelize-cli seed:generate --name books
+```
+
+Run your seeds:
+
+```bash
+$ npx sequelize-cli db:seed:all
+```
+
+Run specific seed:
+
+```bash
+$ npx sequelize-cli db:seed --seed 0000-seed.js
+```
+
+> This command requires sequelize-cli with npx, see more [here](https://sequelize.org/docs/v6/other-topics/migrations).
