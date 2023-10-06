@@ -1,5 +1,7 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table, BelongsToMany } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
+import { Permissions } from './permissions.model';
+import { RoleHasPermissions } from './role-has-permissions';
 
 export enum RolesEnum {
   ADMIN = 'admin',
@@ -19,4 +21,7 @@ export class Roles extends Model {
 
   @Column
   guard: string;
+
+  @BelongsToMany(() => Permissions, () => RoleHasPermissions, 'roleId')
+  permissions: Permissions[];
 }

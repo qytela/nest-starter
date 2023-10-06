@@ -8,7 +8,9 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { Users } from 'src/models/users.model';
 import { Roles } from 'src/models/roles.model';
+import { Permissions } from 'src/models/permissions.model';
 import { UserHasRoles } from 'src/models/user-has-roles.model';
+import { RoleHasPermissions } from 'src/models/role-has-permissions';
 
 import { config } from 'src/helpers';
 
@@ -19,7 +21,13 @@ import { config } from 'src/helpers';
       secret: config('jwt.AUTH_JWT_SECRET'),
       signOptions: { expiresIn: config('jwt.AUTH_JWT_EXPIRES_IN') },
     }),
-    SequelizeModule.forFeature([Users, Roles, UserHasRoles]),
+    SequelizeModule.forFeature([
+      Users,
+      Roles,
+      Permissions,
+      UserHasRoles,
+      RoleHasPermissions,
+    ]),
     PassportModule,
     UsersModule,
   ],

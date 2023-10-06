@@ -1,7 +1,10 @@
 import { Controller, Get, Post, Req, Body, UseGuards } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { JwtAuthGuard } from 'src/modules/auth/strategy/jwt-auth.guard';
+import { PermissionsGuard } from 'src/modules/auth/strategy/permissions-auth.guard';
 import { Entity } from 'src/decorators/entity.decorator';
+import { Permission } from 'src/decorators/permission.decorator';
+import { PermissionsEnum } from 'src/models/permissions.model';
 import { ApiResource } from 'src/resources/api.resource';
 import { BooksCollection } from 'src/resources/books/books.collection';
 import { BooksResource } from 'src/resources/books/books.resource';
@@ -25,6 +28,8 @@ export class BooksController {
     return new ApiResource(new BooksResource(book));
   }
 
+  @UseGuards(PermissionsGuard)
+  @Permission([PermissionsEnum.CREATE_BOOK, PermissionsEnum.READ_BOOK])
   @Get(':id')
   findOne(@Entity(Books) book: Books) {
     return new ApiResource(new BooksResource(book));

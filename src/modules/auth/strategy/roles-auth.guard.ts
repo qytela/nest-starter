@@ -1,7 +1,7 @@
 import {
-  Injectable,
   CanActivate,
   ExecutionContext,
+  Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -21,9 +21,11 @@ export class RolesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const { roles } = request.user;
-    const mapRoles = roles.map((role) => role.get('name'));
+    const mapRoles: string[] = roles.map((role) => role.get('name'));
 
-    if (!mapRoles || !mapRoles.some((role) => getRoles.includes(role))) {
+    const some = mapRoles.some((role) => getRoles.includes(role));
+
+    if (!mapRoles || !some) {
       throw new UnauthorizedException('User does not have the right roles');
     }
 

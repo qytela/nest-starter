@@ -4,6 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Users } from 'src/models/users.model';
 import { Roles } from 'src/models/roles.model';
+import { Permissions } from 'src/models/permissions.model';
 
 import { config } from 'src/helpers';
 
@@ -19,7 +20,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: Users) {
     const user = await this.usersModel.findByPk(payload.id, {
-      include: [Roles],
+      include: [
+        {
+          model: Roles,
+          include: [Permissions],
+        },
+      ],
     });
     if (!user) {
       throw new UnauthorizedException();
