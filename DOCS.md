@@ -8,6 +8,7 @@
   - [Entity Decorator](#entity-decorator)
   - [Role Decorator](#role-decorator)
   - [Permission Decorator](#permission-decorator)
+  - [UserAccess Decorator](#useraccess-decorator)
 - [Resource & Collection](#resource--collection)
   - [Resource](#resource)
   - [Collection](#collection)
@@ -162,6 +163,38 @@ export class BooksController {
   @Get()
   async findAll() {
     return 'You access the protect route!'
+  }
+}
+```
+
+### **UserAccess Decorator**
+
+Get the user, roles, permissions easier with UserAccess Decorator.
+
+Example:
+
+```typescript
+...
+import { JwtAuthGuard } from 'src/modules/auth/strategy/jwt-auth.guard';
+import { UserAccess } from 'src/decorators/user-access.decorator';
+...
+
+@Controller('books')
+export class BooksController {
+  ...
+
+  @UseGuard(JwtAuthGuard)
+  @Get('roles-permissions')
+  findRolesPermissions(
+    @UserAccess() user, // get user
+    @UserAccess('roles') roles, // get roles
+    @UserAccess('permissions') permissions, // get permissions
+  ) {
+    return new ApiResource({
+      user: new UsersResource(user),
+      roles,
+      permissions,
+    });
   }
 }
 ```

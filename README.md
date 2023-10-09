@@ -14,34 +14,41 @@
 ![Production Ready](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
 ![GitHub repo size](https://img.shields.io/github/repo-size/qytela/nest-example.svg)
 
-Welcome to the world of Nest, where your Node.js applications take flight! Our starter kit comes with all the essential features you need to build robust and secure server-side applications. Dive in and explore what Nest has to offer.
+This is the Nest 10 Starter or Boilerplate to avoid the same things over and over again. 🚀
 
 ## Table of Contents 📕
 
-- [Documentation](#documentation-📁)
-- [Getting Started](#getting-started-is-a-breeze-🚀)
+- [Requirements and Features](#requirements-and-features)
+- [Documentation](#documentation)
+- [Getting Started](#getting-started-is-a-breeze)
   - [Installation](#installation)
   - [Setting up .env](#setting-up-env)
   - [Generate App Key](#generate-app-key)
   - [Migrations and Seeders](#migrations-and-seeders)
   - [Running the app](#running-the-app)
-- [Commander](#commander-⚙️)
-- [Cooming Soon](#cooming-soon-🔜)
+- [Commander](#commander)
+- [Cooming Soon](#cooming-soon)
 
-### Features at a Glance 💪:
+## **Requirements and Features**
 
-- **Passport Authentication :** 🔐 Secure your app with Passport authentication.
+Requirements:
+
+- **Node.js v16.x or higher:** As of NestJS 10, we no longer support Node.js v12, as v12 went EOL on April 30, 2022. This means that NestJS 10 requires Node.js v16 or higher ([migration guide](https://docs.nestjs.com/migration-guide#dropping-support-for-nodejs-v12)).
+
+Features:
+
+- **Passport Authentication:** 🔐 Secure your app with Passport authentication.
 - **Sequelize ORM:** 🎲 Interact with databases seamlessly using Sequelize ORM.
 - **[Sentry & Telegram Integration](https://github.com/qytela/nest-starter/blob/1.x/SENTRY.md):** 🚨 Keep an eye on your app's health with Sentry and stay notified via Telegram.
 - **Custom Decorators:** 🖋 Simplify your code with the Custom Decorators.
 - **Fastify Adapter:** ⚡ Optimize performance with Fastify Adapter (switch to Express anytime).
 - **Commander:** ⚙️ Harness the power of Commander for efficient command-line operations.
 
-## **Documentation** 📁
+## **Documentation**
 
-See more documentation [here](https://github.com/qytela/nest-starter/blob/1.x/DOCS.md).
+See more documentation [here](https://github.com/qytela/nest-starter/blob/1.x/DOCS.md). 📁
 
-## **Getting Started is a Breeze! 🚀**
+## **Getting Started is a Breeze!**
 
 ### **Installation:**
 
@@ -87,7 +94,9 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## **Commander** ⚙️
+## **Commander**
+
+Make life easier with commander ⚙️
 
 ```bash
 $ node cmd help
@@ -104,12 +113,12 @@ Commands:
   help [command]                    display help for command
 ```
 
-## **Cooming Soon** 🔜
+## **Cooming Soon**
 
-Here's a sneak peek at what's coming in the next releases:
+Here's a sneak peek at what's coming in the next releases 🔜:
 
 - [x] **Permissions**
-- [ ] **Storage: AWS S3, MinIO, Local**
+- [ ] **Storage: AWS S3, Local**
 - [ ] **Mailer**
 - [ ] **Social Login**
 - [ ] **Dockerize App**
