@@ -43,7 +43,7 @@ export class AuthService {
     try {
       return await this.sequelize.transaction(async (transaction) => {
         const user = await this.usersModel.create(body, { transaction });
-        await this.usersModel.assignRole(user.id, RolesEnum.USER, transaction);
+        await user.assignRole(RolesEnum.USER, transaction);
 
         return user;
       });

@@ -8,7 +8,7 @@ import {
   BeforeCreate,
   BeforeUpdate,
 } from 'sequelize-typescript';
-import { UUIDV4, Transaction } from 'sequelize';
+import { UUIDV4, Transaction, Op } from 'sequelize';
 import * as bcrypt from 'bcrypt';
 import { Roles, RolesEnum } from './roles.model';
 import { UserHasRoles } from './user-has-roles.model';
@@ -46,22 +46,26 @@ export class Users extends Model {
     }
   }
 
-  static async assignRole(
-    userId: string,
-    roleName: RolesEnum,
+  public async assignRole(
+    role: RolesEnum | RolesEnum[],
     transaction?: Transaction,
   ): Promise<void> {
-    const role = await Roles.findOne({ where: { name: roleName } });
-    if (!role) {
+    const mapRole = !Array.isArray(role) ? [role] : role;
+    const getRoles = await Roles.findAll({
+      where: {
+        name: {
+          [Op.in]: mapRole,
+        },
+      },
+    });
+    if (getRoles.length === 0) {
       throw new NotFoundException('Role not found');
     }
 
-    await UserHasRoles.create(
-      {
-        userId,
-        roleId: role.id,
-      },
-      { ...(transaction && { transaction }) },
-    );
+    const userRoles = getRoles.map((role) => ({
+      userId: this.id,
+      roleId: role.get('id'),
+    }));
+    await UserHasRoles.bulkCreate(userRoles, { transaction });
   }
 }
