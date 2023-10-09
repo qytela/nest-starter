@@ -22,25 +22,46 @@ Unravel the authentication process, granting you unparalleled control over user 
 
 ### **Assign Role to User**
 
-Assign roles effortlessly using the model's static method:
+Assign roles effortlessly using the model's method. Example:
 
 ```typescript
-await this.usersModel.assignRole(user.id, RolesEnum.USER, transaction);
+const user = await this.usersModel.findOne({ where: { name: 'Qytela' } });
+await user.assignRole(RolesEnum.USER);
 ```
 
-For a seamless experience (using transactions), consider the recommended approach:
+For a seamless experience (using transactions), consider the recommended approach. Example:
 
 ```typescript
-async register(body): Promise<Users> {
-  try {
-    return await this.sequelize.transaction(async (transaction) => {
-      const user = await this.usersModel.create(body, { transaction });
-      await this.usersModel.assignRole(user.id, RolesEnum.USER, transaction);
+...
+import { Sequelize } from 'sequelize-typescript';
+...
 
-      return user;
-    });
-  } catch (e) {
-    throw new InternalServerErrorException(e.message);
+@Injectable()
+export class AuthService {
+  constructor(
+    ...
+    private sequelize: Sequelize,
+  ) {}
+
+  async register(body): Promise<Users> {
+    try {
+      return await this.sequelize.transaction(async (transaction) => {
+        const user = await this.usersModel.create(body, { transaction });
+
+        // Single
+        await user.assignRole(RolesEnum.USER, transaction);
+
+        // Multiple
+        await user.assignRole(
+          [RolesEnum.ADMIN, RolesEnum.USER],
+          transaction
+        );
+
+        return user;
+      });
+    } catch (e) {
+      throw new InternalServerErrorException(e.message);
+    }
   }
 }
 ```
