@@ -12,6 +12,9 @@
 - [Resource & Collection](#resource--collection)
   - [Resource](#resource)
   - [Collection](#collection)
+- [Storage](#storage)
+  - [Add Storage Module](#add-storage-module)
+  - [Methods](#methods)
 - [Models](#models)
 - [Migrations](#migrations)
 - [Seeders](#seeders)
@@ -280,6 +283,129 @@ export class BooksCollection {
 export class BooksCollection {
   constructor(data: Books[]) {
     return data.map((v) => new BooksResource(v));
+  }
+}
+```
+
+## **Storage**
+
+Save, Delete, Retreive and more using Storage.
+
+### **Add Storage Module**
+
+```typescript
+...
+import { StorageModule } from '@app/storage';
+...
+
+@Module({
+  imports: [
+    ...
+    // Add Storage Module
+    StorageModule.forRoot({
+      default: 'public',
+      disks: {
+        public: {
+          driver: 'public',
+        },
+      },
+    }),
+  ],
+  ...
+})
+export class AppModule {}
+```
+
+`src/main.ts`
+
+```typescript
+...
+import multipart from '@fastify/multipart';
+...
+
+async function bootstrap() {
+  ...
+  // Register fastify multipart
+  await app.register(multipart);
+  ...
+}
+
+bootstrap();
+```
+
+### **Methods**
+
+```typescript
+/**
+ * Retrieves the content of a file from the specified path and returns it as a Buffer.
+ * @param path - The path of the file to retrieve.
+ */
+get(path: string): Promise<Buffer>;
+
+/**
+ * Generates a public URL for the file located at the specified path.
+ * @param path - The file path to generate the URL for.
+ */
+url(path: string): Promise<string>;
+
+/**
+ * Uploads a file to the system with optional options and returns the file URL.
+ * @param file - The file object to be uploaded.
+ * @param options - Additional options for the file upload (optional).
+ */
+put(file: IFile, options?: IPutOptions): Promise<string>;
+
+/**
+ * Checks if a file exists at the specified path.
+ * @param path - The path of the file to check for existence.
+ */
+exists(path: string): Promise<boolean>;
+
+/**
+ * Deletes the file at the specified path and returns true if successful.
+ * @param path - The path of the file to delete.
+ */
+remove(path: string): Promise<boolean>;
+```
+
+Example:
+
+```typescript
+...
+import { ..., UseInterceptors } from '@nestjs/common';
+import { Storage } from '@app/storage';
+import { FastifyFileInterceptor } from 'src/interceptors/fastify-file.interceptor';
+import { FastifyFile, IFastifyFile } from 'src/decorators/fastify-file.decorator';
+...
+
+@Controller('books')
+export class BooksController {
+  ...
+
+  @UseInterceptors(FastifyFileInterceptor(fieldName)) // fieldName (string) is the field name of the request, like 'file', 'image', etc...
+  @Post('upload')
+  async uploadFile(@FastifyFile() fastifyFile: IFastifyFile) {
+    // INIT STORAGE DISK
+    const storage = Storage.disk('public');
+
+    // GET
+    const get = await storage.get('test.txt');
+
+    // URL
+    const url = await storage.url('test.txt');
+
+    // PUT
+    const put = await storage.put(fastifyFile.file, {
+      filePath: 'thumbnail',
+      fileName: 'inyourdream',
+      replacing: true,
+    });
+
+    // EXISTS
+    const exists = await storage.exists('test.txt');
+
+    // REMOVE
+    const remove = await storage.remove('test.txt');
   }
 }
 ```

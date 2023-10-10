@@ -14,6 +14,8 @@
     "@app/telegram/(.*)": "<rootDir>/../libs/telegram/src/$1",
     "@app/telegram": "<rootDir>/../libs/telegram/src",
     "@app/sentry/(.*)": "<rootDir>/../libs/sentry/src/$1",
-    "@app/sentry": "<rootDir>/../libs/sentry/src"
+    "@app/sentry": "<rootDir>/../libs/sentry/src",
+    "@app/storage/(.*)": "<rootDir>/../libs/storage/src/$1",
+    "@app/storage": "<rootDir>/../libs/storage/src"
   }
 }

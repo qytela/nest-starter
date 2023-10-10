@@ -29,6 +29,12 @@
       ],
       "@app/sentry/*": [
         "libs/sentry/src/*"
+      ],
+      "@app/storage": [
+        "libs/storage/src"
+      ],
+      "@app/storage/*": [
+        "libs/storage/src/*"
       ]
     }
   }

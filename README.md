@@ -96,7 +96,7 @@ $ yarn run start:prod
 
 ## **Commander**
 
-Make life easier with commander ⚙️
+Make life easier with commander. ⚙️
 
 ```bash
 $ node cmd help
