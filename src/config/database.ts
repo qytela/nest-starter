@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 import { Dialect } from 'sequelize';
 
@@ -29,7 +29,7 @@ class DatabaseConfig {
 
     this.DATABASE_QUERY_LOG = (sql: string, timing: number) => {
       if (process.env.DATABASE_QUERY_LOG === 'true') {
-        console.log(sql);
+        console.log('\x1b[33mQuery Log - %s\x1b[0m', sql);
       }
     };
 

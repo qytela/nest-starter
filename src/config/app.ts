@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 class AppConfig {
   public APP_NAME: string;

@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 class SentryConfig {
   public SENTRY_ENV: string;

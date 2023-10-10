@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 class JwtConfig {
   public AUTH_JWT_SECRET: string;
