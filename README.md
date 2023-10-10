@@ -118,7 +118,7 @@ Commands:
 Here's a sneak peek at what's coming in the next releases 🔜:
 
 - [x] **Permissions**
-- [ ] **Storage: AWS S3, Local**
+- [x] **Storage: AWS S3 (WIP), Local (DONE)**
 - [ ] **Mailer**
 - [ ] **Social Login**
 - [ ] **Dockerize App**

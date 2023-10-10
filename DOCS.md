@@ -406,6 +406,9 @@ export class BooksController {
 
     // REMOVE
     const remove = await storage.remove('test.txt');
+
+    // RETREIVE MORE FIELD
+    const moreField = fastifyFile.field
   }
 }
 ```
