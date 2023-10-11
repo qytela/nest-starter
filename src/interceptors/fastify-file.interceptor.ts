@@ -6,6 +6,7 @@ import {
   mixin,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { IField, IFile } from '@app/storage/interfaces';
 
 export const FastifyFileInterceptor = (
   fieldName: string,
@@ -16,26 +17,24 @@ export const FastifyFileInterceptor = (
       next: CallHandler<any>,
     ): Promise<Observable<any>> {
       const request = context.switchToHttp().getRequest();
-      const file = await request.file();
+      const reqFile = await request.file();
 
-      const field = {};
-      Object.keys(file.fields).map((key) => {
-        const value = file.fields[key];
+      const fieldData: IField = {};
+      Object.keys(reqFile.fields).map((key) => {
+        const value = reqFile.fields[key];
         if (value.fieldname !== fieldName) {
-          field[value.fieldname] = value.value;
+          fieldData[value.fieldname] = value.value;
         }
       });
 
-      const getFile = file.fields[fieldName];
-
-      request.file = {
-        fieldname: getFile.fieldname,
-        filename: getFile.filename,
-        encoding: getFile.encoding,
-        mimetype: getFile.mimetype,
-        buffer: await getFile.toBuffer(),
+      const file = reqFile.fields[fieldName];
+      const fileData: IFile = {
+        ...file,
+        buffer: await file.toBuffer(),
       };
-      request.field = field;
+
+      request.file = fileData;
+      request.field = fieldData;
 
       return next.handle();
     }

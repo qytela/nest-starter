@@ -7,10 +7,10 @@ import { randomUUID } from 'crypto';
 import { join, extname } from 'path';
 import { config } from 'src/helpers';
 
-import { IFile } from 'src/decorators/fastify-file.decorator';
 import { IStorageDriver, IPutOptions } from '../interfaces';
+import { IFile } from '../interfaces';
 
-export class Public implements IStorageDriver {
+export class PublicDriver implements IStorageDriver {
   private appUrl = config('app.APP_URL');
   private publicPath = join(__dirname, '..', 'storage', 'public');
   private publicUrl = join(this.appUrl, 'public');
@@ -19,10 +19,15 @@ export class Public implements IStorageDriver {
    * Retrieves the content of a file from the specified path and returns it as a Buffer.
    * @param path - The path of the file to retrieve.
    */
-  async get(path: string): Promise<Buffer> {
+  async get(path: string): Promise<Buffer | null> {
     try {
-      const file = await fs.readFile(this.publicPath + path);
-      return file;
+      const fileExists = await this.exists(path);
+      if (fileExists) {
+        const file = await fs.readFile(this.publicPath + path);
+        return file;
+      }
+
+      return null;
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }

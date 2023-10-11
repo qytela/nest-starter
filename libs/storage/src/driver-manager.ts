@@ -1,17 +1,23 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { Public } from './drivers/public.driver';
+import { PublicDriver } from './drivers/public.driver';
+import { AWSDriver } from './drivers/aws.driver';
 
-import { IStorageDriver } from './interfaces';
+import { IOptions, IStorageDriver } from './interfaces';
 
 export class DriverManager {
   private drivers: { [key: string]: any } = {
-    public: Public,
+    public: PublicDriver,
+    s3: AWSDriver,
   };
 
-  getDriver(disk: string, config: Record<string, any>): IStorageDriver {
+  getDriver(disk: string, config: IOptions): IStorageDriver {
     try {
-      return new this.drivers[disk](config);
+      const driver = config.disks[disk].driver;
+
+      return new this.drivers[driver](config.disks[disk]);
     } catch (error) {
+      console.error(error);
+
       throw new InternalServerErrorException(
         `Could not find a disk with the name: ${disk}`,
       );

@@ -303,10 +303,19 @@ import { StorageModule } from '@app/storage';
     ...
     // Add Storage Module
     StorageModule.forRoot({
-      default: 'public',
+      default: config('storage.STORAGE_DEFAULT'),
       disks: {
         public: {
           driver: 'public',
+        },
+        s3: {
+          driver: 's3',
+          endpoint: config('storage.AWS_ENDPOINT'),
+          bucket: config('storage.AWS_BUCKET'),
+          region: config('storage.AWS_REGION'),
+          accessKeyId: config('storage.AWS_ACCESS_KEY'),
+          secretAccessKey: config('storage.AWS_SECRET_ACCESS_KEY'),
+          forcePathStyle: config('storage.AWS_FORCE_PATH_STYLE'),
         },
       },
     }),
@@ -320,13 +329,13 @@ export class AppModule {}
 
 ```typescript
 ...
-import multipart from '@fastify/multipart';
+import fastifyMultipart from '@fastify/multipart';
 ...
 
 async function bootstrap() {
   ...
   // Register fastify multipart
-  await app.register(multipart);
+  await app.register(fastifyMultipart);
   ...
 }
 
@@ -346,7 +355,15 @@ get(path: string): Promise<Buffer>;
  * Generates a public URL for the file located at the specified path.
  * @param path - The file path to generate the URL for.
  */
-url(path: string): Promise<string>;
+url?(path: string): Promise<string>;
+
+/**
+ * (S3) Generates a signed URL for the file located at the specified path.
+ * A signed URL provides limited-time access to the file.
+ * @param path - The file path to generate the signed URL for.
+ * @param expiresIn - The duration in seconds for which the signed URL will be valid (default 15 minutes).
+ */
+signedUrl?(path: string, expiresIn?: number): Promise<string>;
 
 /**
  * Uploads a file to the system with optional options and returns the file URL.
@@ -374,8 +391,9 @@ Example:
 ...
 import { ..., UseInterceptors } from '@nestjs/common';
 import { Storage } from '@app/storage';
+import { IFileResponse } from '@app/storage/interfaces/file-response.interface';
 import { FastifyFileInterceptor } from 'src/interceptors/fastify-file.interceptor';
-import { FastifyFile, IFastifyFile } from 'src/decorators/fastify-file.decorator';
+import { FastifyFile } from 'src/decorators/fastify-file.decorator';
 ...
 
 @Controller('books')
@@ -384,7 +402,7 @@ export class BooksController {
 
   @UseInterceptors(FastifyFileInterceptor(fieldName)) // fieldName (string) is the field name of the request, like 'file', 'image', etc...
   @Post('upload')
-  async uploadFile(@FastifyFile() fastifyFile: IFastifyFile) {
+  async uploadFile(@FastifyFile() fastifyFile: IFileResponse) {
     // INIT STORAGE DISK
     const storage = Storage.disk('public');
 
@@ -394,11 +412,20 @@ export class BooksController {
     // URL
     const url = await storage.url('test.txt');
 
-    // PUT
+    // URL (S3)
+    const signedUrl = await storage.signedUrl(
+      'test.txt',
+      3600, // expires in seconds (default 15 minutes)
+    );
+
+    // PUT (Default)
+    const put = await storage.put(fastifyFile.file);
+
+    // PUT (Options)
     const put = await storage.put(fastifyFile.file, {
-      filePath: 'thumbnail',
-      fileName: 'inyourdream',
-      replacing: true,
+      filePath: 'thumbnail', // storage/public/thumbnail, folder will created if doesn't exists
+      fileName: 'inyourdream', // remove this if you want generate random filename uuid
+      replacing: true, // replacing file if filename exists (except ext)
     });
 
     // EXISTS

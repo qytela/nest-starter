@@ -1,24 +1,8 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-
-export interface IFile {
-  fieldname: string;
-  filename: string;
-  encoding: string;
-  mimetype: string;
-  buffer: Buffer;
-}
-
-export interface IField {
-  [key: string]: any;
-}
-
-export interface IFastifyFile {
-  file: IFile;
-  field: IField;
-}
+import { IFileResponse } from '@app/storage/interfaces/file-response.interface';
 
 export const FastifyFile = createParamDecorator(
-  (data, context: ExecutionContext): IFastifyFile => {
+  (data, context: ExecutionContext): IFileResponse => {
     const request = context.switchToHttp().getRequest();
 
     return {
