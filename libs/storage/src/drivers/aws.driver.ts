@@ -15,7 +15,7 @@ import { Readable } from 'stream';
 import { randomUUID } from 'crypto';
 import { extname } from 'path';
 
-import {
+import type {
   IDiskOptions,
   IFile,
   IPutOptions,

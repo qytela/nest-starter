@@ -16,6 +16,8 @@
     "@app/sentry/(.*)": "<rootDir>/../libs/sentry/src/$1",
     "@app/sentry": "<rootDir>/../libs/sentry/src",
     "@app/storage/(.*)": "<rootDir>/../libs/storage/src/$1",
-    "@app/storage": "<rootDir>/../libs/storage/src"
+    "@app/storage": "<rootDir>/../libs/storage/src",
+    "@app/mailer/(.*)": "<rootDir>/../libs/mailer/src/$1",
+    "@app/mailer": "<rootDir>/../libs/mailer/src"
   }
 }

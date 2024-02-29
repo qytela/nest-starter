@@ -5,10 +5,10 @@ import {
 import * as fs from 'fs-extra';
 import { randomUUID } from 'crypto';
 import { join, extname } from 'path';
+
 import { config } from 'src/helpers';
 
-import { IStorageDriver, IPutOptions } from '../interfaces';
-import { IFile } from '../interfaces';
+import type { IStorageDriver, IPutOptions, IFile } from '../interfaces';
 
 export class PublicDriver implements IStorageDriver {
   private appUrl = config('app.APP_URL');

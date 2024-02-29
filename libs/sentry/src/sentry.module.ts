@@ -5,7 +5,7 @@ import { SentryController } from './sentry.controller';
 
 import { TELEGRAM_OPTIONS } from '@app/telegram/constants';
 import { SENTRY_OPTIONS } from './constants';
-import { IOptions } from './interfaces';
+import type { IOptions } from './interfaces';
 
 @Module({
   providers: [],

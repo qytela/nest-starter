@@ -4,6 +4,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 
 import { join } from 'path';
@@ -24,6 +25,8 @@ async function bootstrap() {
     root: join(__dirname, '..', 'storage', 'public'),
     prefix: '/public',
   });
+
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   await app.listen(PORT);
   console.log('\n\x1b[92mApplication running on port: %i\x1b[0m', PORT);

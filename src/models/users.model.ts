@@ -3,7 +3,6 @@ import {
   Column,
   Model,
   Table,
-  HasMany,
   BelongsToMany,
   BeforeCreate,
   BeforeUpdate,
@@ -12,7 +11,6 @@ import { UUIDV4, Transaction, Op } from 'sequelize';
 import * as bcrypt from 'bcrypt';
 import { Roles, RolesEnum } from './roles.model';
 import { UserHasRoles } from './user-has-roles.model';
-import { Books } from './books.model';
 
 @Table({ tableName: 'users' })
 export class Users extends Model {
@@ -33,9 +31,6 @@ export class Users extends Model {
 
   @BelongsToMany(() => Roles, () => UserHasRoles, 'userId')
   roles: Roles[];
-
-  @HasMany(() => Books, 'userId')
-  books: Books[];
 
   @BeforeCreate
   @BeforeUpdate

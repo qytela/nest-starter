@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { DriverManager } from './driver-manager';
 
 import { STORAGE_OPTIONS } from './constants';
-import { IOptions, IStorageDriver } from './interfaces';
+import type { IOptions, IStorageDriver } from './interfaces';
 
 @Injectable()
 export class StorageService {

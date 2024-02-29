@@ -2,7 +2,7 @@ import { InternalServerErrorException } from '@nestjs/common';
 import { PublicDriver } from './drivers/public.driver';
 import { AWSDriver } from './drivers/aws.driver';
 
-import { IOptions, IStorageDriver } from './interfaces';
+import type { IOptions, IStorageDriver } from './interfaces';
 
 export class DriverManager {
   private drivers: { [key: string]: any } = {

@@ -6,7 +6,8 @@ import {
   mixin,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { IField, IFile } from '@app/storage/interfaces';
+
+import type { IField, IFile } from '@app/storage/interfaces';
 
 export const FastifyFileInterceptor = (
   fieldName: string,

@@ -42,6 +42,7 @@
     "mustache": "^4.2.0",
     "mysql2": "^3.6.1",
     "node-telegram-bot-api": "^0.63.0",
+    "nodemailer": "^6.9.10",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
@@ -60,6 +61,7 @@
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
     "@types/node-telegram-bot-api": "^0.61.8",
+    "@types/nodemailer": "^6.4.14",
     "@types/passport-jwt": "^3.0.9",
     "@types/passport-local": "^1.0.35",
     "@types/sequelize": "^4.28.15",
@@ -102,7 +104,8 @@
     "moduleNameMapper": {
       "^@app/telegram(|/.*)$": "<rootDir>/libs/telegram/src/$1",
       "^@app/sentry(|/.*)$": "<rootDir>/libs/sentry/src/$1",
-      "^@app/storage(|/.*)$": "<rootDir>/libs/storage/src/$1"
+      "^@app/storage(|/.*)$": "<rootDir>/libs/storage/src/$1",
+      "^@app/mailer(|/.*)$": "<rootDir>/libs/mailer/src/$1"
     }
   }
 }

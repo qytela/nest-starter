@@ -15,6 +15,9 @@
 - [Storage](#storage)
   - [Add Storage Module](#add-storage-module)
   - [Methods](#methods)
+- [Mailer](#mailer)
+  - [Add Mailer Module](#add-mailer-module)
+  - [Usage](#usage)
 - [Models](#models)
 - [Migrations](#migrations)
 - [Seeders](#seeders)
@@ -73,7 +76,7 @@ export class AuthService {
 
 Explore custom decorators, meticulously designed to enhance your application's functionality.
 
-### **Entity Decorator**:
+### **Entity Decorator**
 
 Effortlessly find entities by passing parameters. Customize your queries with ease.
 
@@ -438,6 +441,46 @@ export class BooksController {
     const moreField = fastifyFile.field
   }
 }
+```
+
+## **Mailer**
+
+Send mail using NodeMailer.
+
+> https://nodemailer.com/about
+
+### Add Mailer Module
+
+```typescript
+...
+import { MailerModule } from '@app/mailer';
+...
+
+@Module({
+  imports: [
+    ...
+    // Add Mailer Module
+    MailerModule.forRoot({
+      service: config('mailer.MAIL_SERVICE'),
+      host: config('mailer.MAIL_HOST'),
+      port: config('mailer.MAIL_PORT'),
+      secure: config('mailer.MAIL_SECURE'),
+      auth: {
+        user: config('mailer.MAIL_USERNAME'),
+        pass: config('mailer.MAIL_PASSWORD'),
+      },
+    }),
+  ],
+  ...
+})
+export class AppModule {}
+```
+
+### **Usage**
+
+```typescript
+// In controllers or services
+const info = await this.mailerService.sendMail();
 ```
 
 ## **Models**

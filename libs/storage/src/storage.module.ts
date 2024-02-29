@@ -2,7 +2,7 @@ import { Module, DynamicModule } from '@nestjs/common';
 import { StorageService } from './storage.service';
 
 import { STORAGE_OPTIONS } from './constants';
-import { IOptions } from './interfaces';
+import type { IOptions } from './interfaces';
 
 @Module({
   providers: [],

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as TelegramBot from 'node-telegram-bot-api';
 
 import { TELEGRAM_OPTIONS } from './constants';
-import { IOptions } from './interfaces';
+import type { IOptions } from './interfaces';
 
 @Injectable()
 export class TelegramService {

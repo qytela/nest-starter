@@ -1,6 +1,5 @@
-import { Controller, Post, Body, UsePipes } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { EmailExistsPipe } from 'src/pipes/email-exists.pipe';
 import { ApiResource } from 'src/resources/api.resource';
 import { UsersResource } from 'src/resources/users/users.resource';
 import { LoginUserDTO } from 'src/dto/users/login-user.dto';
@@ -15,7 +14,6 @@ export class AuthController {
     return this.authService.login(body);
   }
 
-  @UsePipes(EmailExistsPipe)
   @Post('register')
   async register(@Body() body: CreateUserDTO) {
     const user = await this.authService.register(body);

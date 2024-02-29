@@ -2,7 +2,7 @@ import { Inject, Controller, Post, Body, Param } from '@nestjs/common';
 import { SentryService } from './sentry.service';
 
 import { SENTRY_OPTIONS } from './constants';
-import { IOptions } from './interfaces';
+import type { IOptions } from './interfaces';
 
 @Controller('sentry')
 export class SentryController {

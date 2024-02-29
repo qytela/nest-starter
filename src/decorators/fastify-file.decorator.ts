@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { IFileResponse } from '@app/storage/interfaces/file-response.interface';
+import type { IFileResponse } from '@app/storage/interfaces/file-response.interface';
 
 export const FastifyFile = createParamDecorator(
   (data, context: ExecutionContext): IFileResponse => {

@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
-import { BooksModule } from './modules/books/books.module';
 
 import { config } from 'src/helpers';
 
@@ -27,7 +26,6 @@ import { config } from 'src/helpers';
     }),
     AuthModule,
     UsersModule,
-    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

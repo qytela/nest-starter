@@ -119,7 +119,7 @@ Here's a sneak peek at what's coming in the next releases 🔜:
 
 - [x] **Permissions**
 - [x] **Storage: AWS S3, Local**
-- [ ] **Mailer**
+- [x] **Mailer**
 - [ ] **Social Login**
 - [ ] **Dockerize App**
 - [ ] **And Many More...**

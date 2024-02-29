@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { TelegramService } from '@app/telegram';
 
 import { SENTRY_OPTIONS } from './constants';
-import { IOptions } from './interfaces';
+import type { IOptions } from './interfaces';
 
 @Injectable()
 export class SentryService {
