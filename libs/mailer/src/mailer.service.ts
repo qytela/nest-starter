@@ -5,7 +5,7 @@ import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { config } from 'src/helpers';
 
 import { MAILER_OPTIONS } from './constants';
-import type { IOptions } from './interfaces';
+import type { ITransportOptions, IMailOptions } from './interfaces';
 
 @Injectable()
 export class MailerService {
@@ -13,19 +13,19 @@ export class MailerService {
   private fromName: string;
   private fromAddress: string;
 
-  constructor(@Inject(MAILER_OPTIONS) options: IOptions) {
+  constructor(@Inject(MAILER_OPTIONS) options: ITransportOptions) {
     this.transporter = NodeMailer.createTransport(options);
     this.fromName = config('mailer.MAIL_FROM_NAME');
     this.fromAddress = config('mailer.MAIL_FROM_ADDRESS');
   }
 
-  async sendMail(): Promise<SMTPTransport.SentMessageInfo> {
-    return await this.transporter.sendMail({
-      from: `"${this.fromName}" ${this.fromAddress}`,
-      to: 'julfanshahidayah@gmail.com',
-      subject: 'Test NestJS Mailer',
-      text: 'Hello world!',
-      html: '<b>Hello world!</b>',
-    });
+  async sendMail(
+    options: IMailOptions,
+  ): Promise<SMTPTransport.SentMessageInfo> {
+    if (!options.from) {
+      options['from'] = `"${this.fromName}" ${this.fromAddress}`;
+    }
+
+    return await this.transporter.sendMail(options);
   }
 }

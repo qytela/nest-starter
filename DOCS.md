@@ -488,7 +488,15 @@ constructor(private mailService: MailService) {}
 
 @Get('test-mail')
 async testMail() {
-  const info = await this.mailerService.sendMail();
+  const info = await this.mailService.sendMail({
+    // uncomment if you want override from default .env
+    // from: 'to@mail.com',
+    to: 'sender@mail.com',
+    subject: 'NestJS Test Send Mail',
+    // text: 'Hello world',
+    html: '<b>Hello from NestJS</b>', // can use html instead of text
+  });
+
   return info;
 }
 ```
