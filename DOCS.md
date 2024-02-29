@@ -479,8 +479,18 @@ export class AppModule {}
 ### **Usage**
 
 ```typescript
-// In controllers or services
-const info = await this.mailerService.sendMail();
+// In controller or service
+import { MailerService } from '@app/mailer'
+
+...
+constructor(private mailService: MailService) {}
+...
+
+@Get('test-mail')
+async testMail() {
+  const info = await this.mailerService.sendMail();
+  return info;
+}
 ```
 
 ## **Models**
