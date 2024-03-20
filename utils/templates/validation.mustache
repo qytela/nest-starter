@@ -6,11 +6,8 @@ import {
   registerDecorator,
 } from 'class-validator';
 
-/**
- * Custom validator for checking uniqueness of a value in a database model.
- */
-@ValidatorConstraint({ name: 'IsUnique', async: true })
-class UniqueValidator implements ValidatorConstraintInterface {
+@ValidatorConstraint({ name: '{{name}}', async: true })
+class {{className}} implements ValidatorConstraintInterface {
   /**
    * Validates whether the given value.
    * @param {any} value - The value to validate.
@@ -18,21 +15,6 @@ class UniqueValidator implements ValidatorConstraintInterface {
    * @returns {Promise<boolean>} A promise that resolves to true if the validation pass, false otherwise.
    */
   async validate(value: any, args?: ValidationArguments) {
-    const [model, column] = args.constraints;
-
-    let where = args.property;
-    if (column) where = column;
-
-    if (value) {
-      const data = await model.findOne({
-        where: { [where]: value },
-      });
-
-      if (data) return false;
-
-      return true;
-    }
-
     return true;
   }
 
@@ -42,7 +24,7 @@ class UniqueValidator implements ValidatorConstraintInterface {
    * @returns {string} The error message.
    */
   defaultMessage(args?: ValidationArguments): string {
-    return `The ${args.property} has already been taken`;
+    return `The validation for ${args.property} is invalid`;
   }
 }
 
@@ -52,15 +34,15 @@ class UniqueValidator implements ValidatorConstraintInterface {
  * @param {ValidationOptions} options - Validation options.
  * @returns {Function} A function that registers the decorator.
  */
-export function IsUnique(constraints?: any[], options?: ValidationOptions) {
+export function {{name}}(constraints?: any[], options?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
-      name: 'IsUnique',
+      name: '{{name}}',
       target: object.constructor,
       propertyName,
       options,
       constraints,
-      validator: UniqueValidator,
+      validator: {{className}},
     });
   };
 }

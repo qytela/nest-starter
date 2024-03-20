@@ -5,6 +5,7 @@ const generateAppKey = require('./utils/generate-appkey');
 const generateModel = require('./utils/generate-model');
 const generateMigration = require('./utils/generate-migration');
 const generateResource = require('./utils/generate-resource');
+const generateValidation = require('./utils/generate-validation');
 
 const program = new Command();
 
@@ -84,6 +85,26 @@ program
 
     generateMigration(args);
     console.log(chalk.green('Migration generated success'));
+  });
+
+program
+  .command('generate:validation')
+  .alias('gvl')
+  .description('Generate new custom validator')
+  .option('--name <name>', 'Validator name')
+  .option('--class <class>', 'Validator class name')
+  .action(async (_, { _optionValues: args }) => {
+    const chalk = await importChalk();
+
+    if (!args.name) {
+      return console.log(chalk.red('--name required'));
+    }
+    if (!args.class) {
+      return console.log(chalk.red('--class required'));
+    }
+
+    generateValidation(args);
+    console.log(chalk.green('Validator generated success'));
   });
 
 program

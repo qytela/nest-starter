@@ -26,6 +26,7 @@ This is the Nest 10 Starter or Boilerplate to avoid the same things over and ove
   - [Generate App Key](#generate-app-key)
   - [Migrations and Seeders](#migrations-and-seeders)
   - [Running the app](#running-the-app)
+  - [Default Routes](#default-routes)
 - [Commander](#commander)
 - [Cooming Soon](#cooming-soon)
 
@@ -64,6 +65,8 @@ $ yarn install
 $ cp .env.example .env
 ```
 
+> Nest Starter has [Default Routes](#default-routes) make you must to configure database first.
+
 ### **Generate App Key**
 
 ```bash
@@ -94,6 +97,30 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+### **Default Routes**
+
+- / (Default)
+
+- /auth/login (Authentication)
+
+```json
+{
+  "username": "admin",
+  "password": "password"
+}
+```
+
+- /auth/register (Registration)
+
+```json
+{
+  "fullname": "Qytela",
+  "username": "qytela",
+  "password": "password",
+  "email": "qytelas@mail.com"
+}
+```
+
 ## **Commander**
 
 Make life easier with commander. ⚙️
@@ -103,14 +130,15 @@ $ node cmd help
 Usage: cmd [options] [command]
 
 Options:
-  -h, --help                        display help for command
+  -h, --help                         display help for command
 
 Commands:
-  generate:key|gk [options]         Generate app key
-  generate:model|gmo [options]      Generate new model
-  generate:migration|gmi [options]  Generate new migration
-  generate:resource|gr [options]    Generate new resource and collection
-  help [command]                    display help for command
+  generate:key|gk [options]          Generate app key
+  generate:model|gmo [options]       Generate new model
+  generate:migration|gmi [options]   Generate new migration
+  generate:validation|gvl [options]  Generate new custom validator
+  generate:resource|gr [options]     Generate new resource and collection
+  help [command]                     display help for command
 ```
 
 ## **Cooming Soon**
